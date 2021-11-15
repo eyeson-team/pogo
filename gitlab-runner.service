@@ -1,0 +1,15 @@
+[Unit]
+Description=GitLab Runner
+After=syslog.target network.target
+ConditionFileIsExecutable=/home/runner/bin/gitlab-runner
+
+[Service]
+StartLimitInterval=5
+StartLimitBurst=10
+ExecStart=/home/runner/bin/gitlab-runner run --working-directory /home/runner
+WorkingDirectory=/home/runner
+Restart=always
+RestartSec=120
+
+[Install]
+WantedBy=multi-user.target

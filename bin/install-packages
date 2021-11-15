@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+PACKAGES=$@
+
+if type apt-get >/dev/null 2>&1; then
+  apt-get update && apt-get install -y $PACKAGES
+elif type dnf >/dev/null 2>&1; then
+  dnf install -y $PACKAGES
+elif type apk >/dev/null 2>&1; then
+  apk add $PACKAGES
+fi

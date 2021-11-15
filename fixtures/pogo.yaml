@@ -1,0 +1,16 @@
+default_image: fedora:latest
+working_dir: /home/test
+auth_file: /home/test/.auth.json
+mounts:
+  -
+    volume: /home/test/dir:/mnt/dir
+    tags:
+      - build
+      - deploy
+  -
+    volume: /home/test/fixtures:/mnt/fixtures
+    tags:
+      - test
+    readonly: true
+extra_arguments:
+  help: "--help"
