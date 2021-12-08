@@ -1,15 +1,27 @@
 
 # Pogo a GitLab Executor using Podman built with Go
 
-Run GitLab CI Jobs on a user-level using podman. For ease of use the custom
+Run GitLab CI jobs on a user-level using podman. For ease of use the custom
 executor is managed and processed using a Go package named `pogo`.
 
 ![](./pogo-24fps.gif)
 
+No docker required: pogo provides you with the flexibility of using container
+images for testing but on a user level as it is based on
+[podman](https://podman.io/). Therefor you can easily set it up on server or
+even just register a CI job runner for private use on your local machine that
+will run when you are online. Service images work as well, they are attached to
+the job container so any service ports is available on `localhost`.
+
 ## Usage
 
+We added a [minimal but complete example](./example) of a GitLab project
+utilizing a pogo runner on a Fedora machine.
+
+### Install & Register
+
 In order to use pogo you have to install and register a custom gitlab-runner.
-Doing so configure the pogo binary with tasks config, prepare, run and cleanup
+Doing so, configure the pogo binary with tasks config, prepare, run and cleanup
 steps as arguments.
 
 Inspect the [Makefile](./Makefile) to get details on this process.
@@ -34,6 +46,7 @@ private registries.
 # .pogo.yaml
 default_image: fedora:latest
 working_dir: /home/runner
+cache_dir: /home/runner/cache
 auth_file: /home/runner/.docker-auth.json
 mounts:
   -

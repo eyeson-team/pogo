@@ -1,0 +1,5 @@
+# .pogo.yaml
+default_image: fedora:latest
+working_dir: /home/me/pogo
+cache_dir: /home/me/pogo/cache
+debug: true

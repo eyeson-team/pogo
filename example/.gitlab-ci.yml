@@ -1,0 +1,4 @@
+image: fedora:latest
+
+test:
+  script: uname -a
