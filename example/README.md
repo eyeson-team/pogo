@@ -17,13 +17,11 @@ $ echo $HOME
 /home/me
 $ which podman # ensure podman is present
 /usr/bin/podman
-# Download and build pogo (we will build release binaries asap).
-$ git clone https://github.com/eyeson-team/pogo.git
-$ cd pogo
-$ make bin/gitlab-runner # download gitlab-runner
-$ make bin/pogo # build the pogo project
-# Add the bin/ dir to your path or move the executables to a bin directory.
-$ mv bin/pogo bin/gitlab-runner ~/bin/
+# Download latest release from https://github.com/eyeson-team/pogo/releases
+$ wget -O $HOME/bin/pogo https://github.com/eyeson-team/pogo/releases/download/v0.1.0/pogo
+# Download latest gitlab-runner
+$ wget -O $HOME/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+$ chmod u+x $HOME/bin/{pogo,gitlab-runner}
 ```
 
 GitLab runner is a process we want to run on our computer (or server) without
