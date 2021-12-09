@@ -1,8 +1,9 @@
 
 # Pogo a GitLab Executor using Podman built with Go
 
-Run GitLab CI jobs on a user-level using podman. For ease of use the custom
-executor is managed and processed using a Go package named `pogo`.
+Run GitLab CI jobs on a user-level with containers using podman. For ease of
+use the custom executor is managed and processed using a Go package named
+`pogo`.
 
 ![](./pogo-24fps.gif)
 
@@ -17,6 +18,11 @@ the job container so any service ports is available on `localhost`.
 
 We added a [minimal but complete example](./example) of a GitLab project
 utilizing a pogo runner on a Fedora machine.
+
+Use the configuration file to provide a default fallback container image for
+jobs that have none defined, providing an auth-file that allows to authenticate
+podman for private registries, mount directories for specific jobs identified
+by tags or add extra arguments to podman identified by tags.
 
 ### Install & Register
 
@@ -61,14 +67,25 @@ mounts:
     readonly: true
 extra_arguments:
   help: "--help"
+  buildah: '--security-opt label=disable --security-opt seccomp=unconfined --device /dev/fuse:rw'
 ```
 
 We suggest running the gitlab-runner using systemd, see the `Makefile` and
 `gitlab-runner.service` file on how to setup a proper task on user-level.
 
-Note: In case you run `pogo` on a server as user, the systemd task only runs
+In case you run `pogo` on a server as user, the systemd task only runs
 when the user is logged in. You can adapt this behaviour to run `loginctl
 enable-linger <username>`.
+
+If you want to build containers inside a container we recommend to use
+[buildah](https://buildah.io/) and checking out the [best practice of Red
+Hat](https://developers.redhat.com/blog/2019/08/14/best-practices-for-running-buildah-in-a-container)
+doing so.
+
+If your project CI job requires a secret you can either use [GitLab to add env
+variables](https://docs.gitlab.com/ee/ci/variables/#add-a-cicd-variable-to-a-project)
+or store it on the exectur host and define a mount for your job containers.
+Ensure you never store the secret inside of your container image.
 
 ## Development
 

@@ -50,22 +50,22 @@ register:
 		--shell bash \
 		--builds-dir /builds \
 		--cache-dir /cache \
-		--custom-config-exec "/home/runner/bin/pogo" \
+		--custom-config-exec "$(HOME)/bin/pogo" \
 		--custom-config-args "config" \
 		--custom-config-args "--config" \
-		--custom-config-args "/home/runner/.pogo.yaml" \
-		--custom-prepare-exec "/home/runner/bin/pogo" \
+		--custom-config-args "$(HOME)/.pogo.yaml" \
+		--custom-prepare-exec "$(HOME)/bin/pogo" \
 		--custom-prepare-args "prepare" \
 		--custom-prepare-args "--config" \
-		--custom-prepare-args "/home/runner/.pogo.yaml" \
-		--custom-run-exec "/home/runner/bin/pogo" \
+		--custom-prepare-args "$(HOME)/.pogo.yaml" \
+		--custom-run-exec "$(HOME)/bin/pogo" \
 		--custom-run-args "run" \
 		--custom-run-args "--config" \
-		--custom-run-args "/home/runner/.pogo.yaml" \
-		--custom-cleanup-exec "/home/runner/bin/pogo" \
+		--custom-run-args "$(HOME)/.pogo.yaml" \
+		--custom-cleanup-exec "$(HOME)/bin/pogo" \
 		--custom-cleanup-args "clean" \
 		--custom-cleanup-args "--config" \
-		--custom-cleanup-args "/home/runner/.pogo.yaml"
+		--custom-cleanup-args "$(HOME)/.pogo.yaml"
 
 .PHONY: unregister
 unregister:
